@@ -1,3 +1,5 @@
+![PPP](/resources/ppp.png)
+
 PeasShop
 ========
 
@@ -53,3 +55,10 @@ This command should update the repository, install all dependencies and (re)star
 
 Messages
 ========
+
+
+
+
+Credits
+=======
+[Logo](https://www.iconfinder.com/icons/20130/style_xp_icon#size=128)
