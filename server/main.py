@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, redirect
+from flask import Flask, request, render_template, redirect, url_for
 from flask_sockets import Sockets
 import random
 import string
@@ -31,7 +31,7 @@ def new_game():
     while new_game_id in game_instances:
         new_game_id = generate_game_id(game_id_length)
     game_instances[new_game_id] = Game(new_game_id)
-    return redirect('/game/{}'.format(new_game_id))
+    return redirect(url_for('game', gameid=new_game_id))
 
 
 @app.route('/game/<gameid>')
@@ -41,7 +41,7 @@ def game(gameid):
         return render_file("game.html", url=request.url)
     else:
         #This game doesn't exist yet, just redirect to the main page.
-        return redirect('/')
+        return redirect(url_for('index'))
 
 
 @app.route('/')
