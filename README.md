@@ -14,6 +14,15 @@ Lib dependency (manual python installation commands, use requirements.txt instea
 * pip install gevent
 * pip install gevent-websocket
 
+Running on the server
+=====================
+
+For now, just `python main.py`, and *not*
+`gunicorn -k flask_sockets.worker --debug main:app` as debug doesn't seem to work.
+
+*TODO*: Actually make it run correctly on the PRODACTIAN server using stuff below.
+
+
 ##Server
 ###Install
 Choose a destination which is going to be the base directory of the project.
