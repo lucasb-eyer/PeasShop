@@ -1,7 +1,8 @@
-from flask import Flask, request, render_template, redirect, url_for, json
+from flask import Flask, request, render_template, redirect, url_for
 from flask_sockets import Sockets
 import random
 import string
+import json
 from game import Game
 
 app = Flask(__name__)
@@ -20,7 +21,7 @@ def render_file(filename, *args, **kwargs):
 
 @sockets.route('/ws')
 def ws(ws):
-    ws.send(json.jsonify({'well': 'cum'}))
+    ws.send(json.dumps({'wel': 'cum'}))
     while True:
         message = ws.receive()
         ws.send(message)
