@@ -1,1 +1,15 @@
-#TODO: use me
+Fabric==1.8.0
+Flask==0.10.1
+Flask-Sockets==0.1
+Jinja2==2.7.1
+MarkupSafe==0.18
+Werkzeug==0.9.4
+ecdsa==0.10
+gevent==0.13.8
+gevent-websocket==0.3.6
+greenlet==0.4.1
+gunicorn==18.0
+itsdangerous==0.23
+paramiko==1.12.0
+pycrypto==2.6.1
+uWSGI==1.9.20
