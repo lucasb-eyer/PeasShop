@@ -46,7 +46,7 @@ def game(gameid):
 
 @app.route('/')
 def index():
-    return render_file("index.html")
+    return render_file("index.html", new_url=url_for('new_game'))
 
 
 def generate_game_id(k):
