@@ -6,16 +6,11 @@ connect = ->
         alert err
         throw new Error err
 
-    # Parse url params
-    # queryparams = {}
-    # parts = window.location.href.replace /[?&]+([^=&]+)=([^&]*)/gi, (m, k, v) ->
-        # queryparams[k] = v
-    # g = queryparams["g"]
-
+    # Extract the game ID from the current location.
     g = (window.location.pathname.match /.*game\/([a-zA-Z0-9]+).*/)[1]
-    # addr = "ws://#{window.location.hostname}:#{window.location.port}/ws?g=#{g}"
-    addr = "ws://#{window.location.host}/ws?g=#{g}"
 
+    # And make a websocket connection accordingly
+    addr = "ws://#{window.location.host}/ws?g=#{g}"
     conn = new WebSocket addr
 
     conn.onopen = (evt) ->
