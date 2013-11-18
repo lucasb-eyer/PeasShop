@@ -5,14 +5,18 @@ GET YO OUTFIT
 
 Install
 =======
-Lib dependency (manual python installation commands, use requirements.txt instead):
 
-* sudo apt-get install libevent-dev
-* pip install flask
-* pip install Flask-Sockets
-* pip install gunicorn
-* pip install gevent
-* pip install gevent-websocket
+The development files of libevent are necessary. On ubuntu, use
+
+```bash
+$ sudo apt-get install libevent-dev
+```
+
+Then, in a virtualenv, install all python dependencies through:
+
+```bash
+$ pip install -r requirements.txt
+```
 
 Running on the server
 =====================
