@@ -1,0 +1,23 @@
+# nginx configuration block, might be appended to /etc/nginx/sites-available/default
+# nginx needs to be restarted after
+
+server {
+  listen    80;
+  server_name   your.domain.com;
+
+  access_log /var/log/nginx/peas_shop.access.log;
+  error_log /var/log/nginx/peas_shop.error.log;
+
+  location /static {
+    alias /var/www/peas_shop/server/static; #css, js etc
+  }
+
+  #location /favicon.ico {
+  # alias /var/www/peas_shop/server/static/favicon.ico;
+  #}
+
+  location / {
+    include uwsgi_params;
+    uwsgi_pass unix:///var/www/peas_shop/run/sock.file;
+  }
+}
