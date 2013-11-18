@@ -57,7 +57,7 @@ if __name__ == '__main__':
     from gevent import pywsgi
     from geventwebsocket.handler import WebSocketHandler
 
-    port = 8000
+    port = 9000
     print("Gonna listen on port {}".format(port))
 
     server = pywsgi.WSGIServer(('', port), app, handler_class=WebSocketHandler)
