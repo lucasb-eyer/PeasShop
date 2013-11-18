@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, redirect, url_for
+from flask import Flask, request, render_template, redirect, url_for, json
 from flask_sockets import Sockets
 import random
 import string
@@ -6,6 +6,7 @@ from game import Game
 
 app = Flask(__name__)
 app.debug = True
+app.url_map.strict_slashes = False
 sockets = Sockets(app)
 
 #Dictionary of games
@@ -17,21 +18,22 @@ def render_file(filename, *args, **kwargs):
     return render_template(filename, *args, **kwargs)
 
 
-@sockets.route('/echo')
-def echo_socket(ws):
+@sockets.route('/ws')
+def ws(ws):
+    ws.send(json.jsonify({'well': 'cum'}))
     while True:
         message = ws.receive()
         ws.send(message)
 
 
-@app.route('/game')
-def new_game():
+@app.route('/newgame')
+def newgame():
     # Create a new game with an id not yet in use
-    new_game_id = generate_game_id(game_id_length)
-    while new_game_id in game_instances:
-        new_game_id = generate_game_id(game_id_length)
-    game_instances[new_game_id] = Game(new_game_id)
-    return redirect(url_for('game', gameid=new_game_id))
+    gid = generate_game_id(game_id_length)
+    while gid in game_instances:
+        gid = generate_game_id(game_id_length)
+    game_instances[gid] = Game(gid)
+    return redirect(url_for('game', gameid=gid))
 
 
 @app.route('/game/<gameid>')
