@@ -5,9 +5,14 @@ GET YO OUTFIT
 
 Install
 =======
-Lib dependency:
+Lib dependency (manual python installation commands, use requirements.txt instead):
 
 * sudo apt-get install libevent-dev
+* pip install flask
+* pip install Flask-Sockets
+* pip install gunicorn
+* pip install gevent
+* pip install gevent-websocket
 
 ##Server
 ###Install
@@ -32,3 +37,6 @@ On your local machine (from the *code/server* directory) execute:
 fab update
 ```
 This command should update the repository, install all dependencies and (re)start the uwsgi server in one go.
+
+Messages
+========
