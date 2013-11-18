@@ -77,8 +77,10 @@ Needed
 
 List of art
 -----------
-* Coints for money 
-* Gender icons!
+* Coints for money  https://www.iconfinder.com/icons/50679/coin_icon#size=48
+* Gender icons! http://en.wikipedia.org/wiki/File:SF_gender_symbols.png
+* Time icon ?  https://www.iconfinder.com/icons/171505/clock_time_icon#size=128
+* Logo!!!! https://www.iconfinder.com/icons/20130/style_xp_icon#size=128
 * Nukes
 * Taste meter? 
 * Victory icons?
