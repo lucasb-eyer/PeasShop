@@ -1,0 +1,10 @@
+html {
+    background-color: rgb(232, 232, 232);
+    color: rgb(88, 88, 88);
+    text-align: justify;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+}
