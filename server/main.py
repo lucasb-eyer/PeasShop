@@ -36,7 +36,12 @@ def new_game():
 
 @app.route('/game/<gameid>')
 def game(gameid):
-    return render_file("game.html", url=request.url)
+    if gameid in game_instances:
+        #This game exist.
+        return render_file("game.html", url=request.url)
+    else:
+        #This game doesn't exist yet, just redirect to the main page.
+        return redirect('/')
 
 
 @app.route('/')
