@@ -40,7 +40,7 @@ def game(gameid):
 
 
 @app.route('/')
-def hello():
+def index():
     return render_file("index.html")
 
 
