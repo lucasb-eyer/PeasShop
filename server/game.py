@@ -23,4 +23,8 @@ class Game(object):
         for player in self.players:
             player.send(msg)
 
-
+    def opponent(self, me):
+        if self.players[0] == me:
+            return self.players[1]
+        else:
+            return self.players[0]

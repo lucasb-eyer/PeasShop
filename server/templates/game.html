@@ -31,14 +31,32 @@
 
         #arena {
             height: 400px;
+            width: 600px;
             margin: 20px 0px;
             background-color: white;
+
+            overflow: hidden;
+            position: relative;
+        }
+
+        .item {
+            position: absolute;
+            left: 0;
+            width: 150px;
+
+            overflow: hidden;
+        }
+
+        .item img {
+            width: 150px;
         }
     </style>
 
     <title>A Game of Peas</title>
 
     <script src=/static/jquery-2.0.2.min.js></script>
+    <script src=/static/d3.v3.min.js></script>
+    <script src=/static/mustache.js></script>
     <script src=/static/main.js></script>
 </head>
 <body>
@@ -53,6 +71,7 @@
     <div id=game>
         <div id=p1></div>
         <div id=arena></div>
+        <!-- <svg id=arena></svg> -->
         <div id=p2></div>
     </div>
 
