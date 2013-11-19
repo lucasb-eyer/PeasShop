@@ -56,6 +56,8 @@ connect = ->
                 ($ '#mymoney').text msg.money
                 if msg.color_bonus
                     ($ '#mybonus').text " + #{msg.color_bonus} color bonus"
+                else
+                    ($ '#mybonus').text ""
             when 'other_took'
                 $i = $ "#" + idify msg.item
                 $i.stop()
@@ -66,6 +68,8 @@ connect = ->
                 ($ '#othermoney').text msg.other_money
                 if msg.other_color_bonus
                     ($ '#otherbonus').text " + #{msg.other_color_bonus} color bonus"
+                else
+                    ($ '#otherbonus').text ""
         return
 
 mkitem = (item, i) ->
