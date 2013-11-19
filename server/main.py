@@ -38,7 +38,7 @@ def ws(ws):
     while True:
         message = ws.receive()
         m = json.loads(message)
-        if m['type'] == 'wanna' :
+        if m['type'] == 'wanna':
             player.can_buy(m['id'])
 
 
@@ -163,7 +163,6 @@ if __name__ == '__main__':
     from geventwebsocket.handler import WebSocketHandler
 
     item_list = initialize_item_list()
-    print(item_list)
 
     port = 9000
     print("Gonna listen on port {}".format(port))

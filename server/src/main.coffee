@@ -3,6 +3,8 @@ conn = 0
 W = 600
 H = 400
 
+idify = (s) -> s.replace /[^a-zA-Z0-9]/g, -> '_'
+
 connect = ->
     if not window["WebSocket"]?
         err = "No WebSocket support. Get a better browser!"
@@ -36,16 +38,26 @@ connect = ->
 
                 # Put stuff into the arena!
                 for item, i in msg.items
-                    $i = mkitem item, i
-                    $arena.append $i
+                    do (item, i) ->
+                        $i = mkitem item, i
+                        $arena.append $i
 
-                    $i.click ->
-                        console.log item
-                        # TODO
-                        # conn.send {''}
+                        $i.click ->
+                            console.log item
+                            conn.send JSON.stringify({type: 'wanna', id: item.id})
             when 'you_took'
+                $i = $ "#" + idify msg.item
+                $i.stop()
+                $i.appendTo $ '#p2'
+                $i.css 'margin-left': 0, 'margin-top': 0
+                $i.addClass 'has'
             when 'other_took'
-                ($ )
+                $i = $ "#" + idify msg.item
+                $i.stop()
+                $i.appendTo $ '#p1'
+                $i.css 'margin-left': 0, 'margin-top': 0
+                $i.addClass 'has'
+        return
 
 mkitem = (item, i) ->
     $i = $ Mustache.render item_template, item
@@ -53,6 +65,7 @@ mkitem = (item, i) ->
 
     t = (1.1 - +item.speed)*10000
 
+    $i.attr id: idify item.id
     $i.css
         'margin-left': 600
         'margin-top': (i % 2) * 200
