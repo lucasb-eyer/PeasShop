@@ -14,10 +14,7 @@ connect = ->
     conn = new WebSocket addr
 
     conn.onopen = (evt) ->
-        console.log "Connected!"
-        console.log evt
         conn.send g
-        conn.send 'Echo this, biatch!'
 
     conn.onclose = (evt) ->
         console.log "Connection lost"
@@ -26,6 +23,18 @@ connect = ->
     conn.onmessage = (evt) ->
         console.log "Message!"
         console.log evt.data
+        msg = JSON.parse evt.data
+        switch msg.type
+            when 'start'
+                start_game msg.items
+
+start_game = (items) ->
+    ($ '#waiting').hide()
+    ($ '#game').show()
+
+    # Put stuff into the arena!
+    for item in items
+        $ ''
 
 # function handleMessage(msg){
 #         var json = jQuery.parseJSON(msg);

@@ -16,6 +16,24 @@
             margin: 0;
             padding: 0;
         }
+
+        #game {
+            display: none;
+        }
+
+        #p1, #p2 {
+            position: relative;
+            left: 10%;
+            width: 80%;
+            height: 200px;
+            background-color: gray;
+        }
+
+        #arena {
+            height: 400px;
+            margin: 20px 0px;
+            background-color: white;
+        }
     </style>
 
     <title>A Game of Peas</title>
@@ -26,9 +44,17 @@
 <body>
     <h1>A Game of Peas</h1>
 
-    <h2>Gr8, ur m8's l8!</h2>
+    <div id=waiting>
+        <h2>Gr8, ur m8's l8!</h2>
 
-    <p>Send him the following link: <a href={{url}}>{{url}}</a></p>
+        <p>Send him the following link: <a href={{url}}>{{url}}</a></p>
+    </div>
+
+    <div id=game>
+        <div id=p1></div>
+        <div id=arena></div>
+        <div id=p2></div>
+    </div>
 
     <script>connect();</script>
 </body>
