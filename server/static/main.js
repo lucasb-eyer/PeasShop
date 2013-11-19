@@ -71,6 +71,8 @@ connect = function() {
         ($('#mymoney')).text(msg.money);
         if (msg.color_bonus) {
           ($('#mybonus')).text(" + " + msg.color_bonus + " color bonus");
+        } else {
+          ($('#mybonus')).text("");
         }
         break;
       case 'other_took':
@@ -86,6 +88,8 @@ connect = function() {
         ($('#othermoney')).text(msg.other_money);
         if (msg.other_color_bonus) {
           ($('#otherbonus')).text(" + " + msg.other_color_bonus + " color bonus");
+        } else {
+          ($('#otherbonus')).text("");
         }
     }
   };
