@@ -14,6 +14,7 @@ sockets = Sockets(app)
 
 #Dictionary of games
 game_id_length = 3
+game_money_init = 20
 game_instances = {}
 item_list = None
 
@@ -30,7 +31,7 @@ def ws(ws):
     print("GID: {}".format(gid))
 
     game = game_instances[gid]
-    player = Player(ws)
+    player = Player(ws, game_money_init, game)
 
     game.join(player)
 
@@ -78,24 +79,27 @@ def initialize_item_list():
     # Here are some constants for the UK shop.
     categories = {'head_category': {'f': ['womens-hats-caps'],
                                     'm': ['mens-hats-caps']},
-                  'body_category': {'m': ['mens-clothing-t-shirts'],
-                                    'f': ['womens-clothing-tops']},
-                  'trouser_category': {'f': ['womens-clothing-mini-skirts'],
-                                       'm': ['mens-clothing-trousers']},
-                  'shoes_category': {'m': ['mens-shoes'],
-                                     'f': ['womens-shoes']},
-                  'accesories_category': {'n': ['accessories',
-                                                'bags-accessories-womens' ]},
+#                  'body_category': {'m': ['mens-clothing-t-shirts'],
+#                                    'f': ['womens-clothing-tops']},
+#                  'trouser_category': {'f': ['womens-clothing-mini-skirts'],
+#                                       'm': ['mens-clothing-trousers']},
+#                  'shoes_category': {'m': ['mens-shoes'],
+#                                     'f': ['womens-shoes']},
+#                  'accesories_category': {'n': ['accessories',
+#                                                'bags-accessories-womens' ]},
                   'special_category': {'n': ['strings-thongs']}}
 
     for c, d in categories.items():
         for g, cat_list in d.items():
             for cat in cat_list:
-                item_list += get_k_items_from_category(
+                item_list_temp =   get_k_items_from_category(
                      k_per_category, cat,
                      c, g)
+                item_list += item_list_temp
+
     print('Done, WITH A D!')
-    return random.shuffle(item_list)
+    random.shuffle(item_list)
+    return item_list
 
 
 def get_k_items_from_category(
@@ -116,7 +120,7 @@ def get_k_items_from_category(
         search = requests.get(query, headers={'Accept': 'application/json'})
         items = search.json()
         for i in range(k):
-   #     for i in range(k/3 + 1):
+            #     for i in range(k/3 + 1):
             rand_index = random.randint(0, 99)
             sku = items[u'searchResults'][u'data'][rand_index][u'sku']
             article_query = '{}/article/{}/{}'.format(api, domain_url, sku)
@@ -126,12 +130,27 @@ def get_k_items_from_category(
             article_dict = {'type': type}
             article_dict['name'] = article.json()[u'name']
             article_dict['img_url'] = article.json()[u'images'][u'detailUrl']
-            article_dict['price'] = article.json()[u'price']
+            price = article.json()[u'price']
+            if( price < 20):
+                article_dict['price'] = 1
+            elif( price < 45 ):
+                article_dict['price'] = 2
+            elif( price < 80 ):
+                article_dict['price'] = 3
+            elif( price < 150 ):
+                article_dict['price'] = 4
+            else:
+                article_dict['price'] = 5
+
+            if( random.uniform(0.0, 1.0) > 0.8):
+                article_dict['price'] = random.randint(1,5)
             article_dict['rating'] = random.uniform(0.0, 5.0)
             article_dict['color'] = article.json()[u'color']
             article_dict['gender'] = gender
-            article_dict['speed'] = random.uniform(0.1, 0.1)
+            article_dict['speed'] = random.uniform(0.1, 1.0)
+            article_dict['id'] = sku
             res.append(article_dict)
+
         page += 1
 
     return  res
@@ -142,6 +161,7 @@ if __name__ == '__main__':
     from geventwebsocket.handler import WebSocketHandler
 
     item_list = initialize_item_list()
+    print(item_list)
 
     port = 9000
     print("Gonna listen on port {}".format(port))
