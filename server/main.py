@@ -61,7 +61,7 @@ def game(gameid):
 
 @app.route('/')
 def index():
-    return render_file("index.html", new_url=url_for('new_game'))
+    return render_file("index.html", new_url=url_for('newgame'))
 
 
 def generate_game_id(k):
@@ -95,7 +95,7 @@ def initialize_item_list():
                      k_per_category, cat,
                      c, g)
     print('Done, WITH A D!')
-    return item_list
+    return random.shuffle(item_list)
 
 
 def get_k_items_from_category(
