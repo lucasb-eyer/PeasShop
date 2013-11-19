@@ -67,6 +67,9 @@ connect = function() {
           'margin-top': 0
         });
         $i.addClass('has');
+        ($('#myscore')).text(msg.score.toFixed(2));
+        ($('#mymoney')).text(msg.money);
+        ($('#mybonus')).text(" + " + msg.bonus + " color bonus");
         break;
       case 'other_took':
         $i = $("#" + idify(msg.item));
@@ -77,6 +80,9 @@ connect = function() {
           'margin-top': 0
         });
         $i.addClass('has');
+        ($('#otherscore')).text(msg.other_score.toFixed(2));
+        ($('#othermoney')).text(msg.other_money);
+        ($('#otherbonus')).text(" + " + msg.bonus + " color bonus");
     }
   };
 };

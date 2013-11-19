@@ -7,6 +7,7 @@ class Player(object):
         self.game = game
         self.item_dict = {item['id']: item for item in game.item_list}
         self.slots = {}
+        self.score = 0.0
 
     def send(self, msg):
         self.ws.send(json.dumps(msg))
@@ -19,9 +20,11 @@ class Player(object):
         if self.money >= cost:
             if slot not in self.slots:
                 self.money -= cost
+                self.score += self.item_dict[item_id]['rating']
                 self.slots[slot] = self.item_dict[item_id]
                 self.send({'type' : 'you_took', 'item' : item_id, 'money' :
-                           self.money})
+                           self.money, 'score' : self.score})
                 self.game.opponent(self).send({'type' : 'other_took', 'item' :
                                                item_id, 'other_money' :
-                                               self.money})
+                                               self.money, 'other_score' :
+                                               self.score})
