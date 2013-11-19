@@ -80,6 +80,10 @@ connect = ->
                 if msg.replaces
                     for [1..5]
                         $("#" + idify(msg.replaces)).remove()
+            when 'win'
+                alert 'OMG YOU WON'
+            when 'lose'
+                alert 'LOSER'
         return
 
 mkitem = (item, i) ->
@@ -92,7 +96,7 @@ mkitem = (item, i) ->
     $i.css
         'margin-left': 600
         'margin-top': (i % 2) * 200
-    $i.delay(i*2000).show().animate {'margin-left': -200}, t, 'linear'
+    $i.delay(i*1000).show().animate {'margin-left': -200}, t, 'linear'
     return $i
 
 item_template = """

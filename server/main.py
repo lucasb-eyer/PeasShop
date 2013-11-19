@@ -81,8 +81,8 @@ def initialize_item_list():
     k_per_category = 20
     item_list = []
     # Here are some constants for the UK shop.
-    categories = {'head_category': {'f': ['womens-hats-caps'],
-                                    'm': ['mens-hats-caps']},
+    categories = {#'head_category': {'f': ['womens-hats-caps'],
+                  #                  'm': ['mens-hats-caps']},
 #                  'body_category': {'m': ['mens-clothing-t-shirts'],
 #                                    'f': ['womens-clothing-tops']},
 #                  'trouser_category': {'f': ['womens-clothing-mini-skirts'],
@@ -91,7 +91,8 @@ def initialize_item_list():
 #                                     'f': ['womens-shoes']},
 #                  'accesories_category': {'n': ['accessories',
 #                                                'bags-accessories-womens' ]},
-                  'special_category': {'n': ['strings-thongs']}}
+                  'special_category': {'n': ['strings-thongs'],
+                                       'f': ['bras']}}
 
     i = 0
     stdout.write('\r{}/11'.format(i))

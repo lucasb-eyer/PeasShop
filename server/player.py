@@ -6,6 +6,7 @@ class Player(object):
         self.money = money_init
         self.game = game
         self.item_dict = {item['id']: item for item in game.item_list}
+        self.types = set(item['type'] for item in self.item_dict.values())
         self.slots = {}
         self.score = 0.0
         self.bonus = 0.0
@@ -22,11 +23,9 @@ class Player(object):
         if slot in self.slots:
             cost += 3
             replaces = self.slots[slot]['id']
-            # self.score -= self.slots[slot]['rating']
 
         if self.money >= cost:
             self.money -= cost
-            # self.score += self.item_dict[item_id]['rating']
             self.slots[slot] = self.item_dict[item_id]
             self.score = sum((item['rating'] for item in self.slots.values()))
 
@@ -50,3 +49,7 @@ class Player(object):
                                             self.score,
                                             'other_color_bonus' : self.bonus,
                                             'replaces': replaces})
+        self.game.checkwin()
+
+    def finished(self):
+        return len(self.slots) == len(self.types) or self.money == 0

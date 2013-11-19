@@ -103,6 +103,12 @@ connect = function() {
             $("#" + idify(msg.replaces)).remove();
           }
         }
+        break;
+      case 'win':
+        alert('OMG YOU WON');
+        break;
+      case 'lose':
+        alert('LOSER');
     }
   };
 };
@@ -119,7 +125,7 @@ mkitem = function(item, i) {
     'margin-left': 600,
     'margin-top': (i % 2) * 200
   });
-  $i.delay(i * 2000).show().animate({
+  $i.delay(i * 1000).show().animate({
     'margin-left': -200
   }, t, 'linear');
   return $i;

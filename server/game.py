@@ -28,3 +28,12 @@ class Game(object):
             return self.players[1]
         else:
             return self.players[0]
+
+    def checkwin(self):
+        if self.players[0].finished() and self.players[1].finished():
+            if self.players[0].score + self.players[0].bonus > self.players[1].score + self.players[1].bonus:
+                self.players[0].send({'type': 'win'})
+                self.players[1].send({'type': 'lose'})
+            else:
+                self.players[0].send({'type': 'lose'})
+                self.players[1].send({'type': 'win'})
