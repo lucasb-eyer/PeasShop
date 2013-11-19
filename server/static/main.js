@@ -69,7 +69,6 @@ connect = function() {
         $i.addClass('has');
         ($('#myscore')).text(msg.score.toFixed(2));
         ($('#mymoney')).text(msg.money);
-        console.log(msg.color_bonus);
         if (msg.color_bonus) {
           ($('#mybonus')).text(" + " + msg.color_bonus + " color bonus");
         }
@@ -85,8 +84,7 @@ connect = function() {
         $i.addClass('has');
         ($('#otherscore')).text(msg.other_score.toFixed(2));
         ($('#othermoney')).text(msg.other_money);
-        console.log(msg.color_bonus);
-        if (msg.color_bonus) {
+        if (msg.other_color_bonus) {
           ($('#otherbonus')).text(" + " + msg.other_color_bonus + " color bonus");
         }
     }
