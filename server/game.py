@@ -1,6 +1,12 @@
+import requests
+import random
+
+
 class Game(object):
-    def __init__(self, game_id):
+
+    def __init__(self, game_id, item_list):
         self.game_id = game_id
+        self.item_list = item_list
         self.players = []
 
     def join(self, player):
@@ -8,17 +14,13 @@ class Game(object):
         self.broadcast({"type": "join", "name": "Anon"})
 
         if len(self.players) == 2:
-            FAKE_ITEMS = [
-                {"type": "shoe", "color": "red"},
-                {"type": "shoe", "color": "blue"},
-                {"type": "shoe", "color": "black"},
-                {"type": "shoe", "color": "yellow"},
-            ]
             self.broadcast({
                 "type": "start",
-                "items": FAKE_ITEMS,
+                "items": self.item_list,
             })
 
     def broadcast(self, msg):
         for player in self.players:
             player.send(msg)
+
+
