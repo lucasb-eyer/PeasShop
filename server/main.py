@@ -37,7 +37,9 @@ def ws(ws):
 
     while True:
         message = ws.receive()
-        ws.send(message)
+        m = json.loads(message)
+        if m['type'] == 'wanna' :
+            player.can_buy(m['id'])
 
 
 @app.route('/newgame')

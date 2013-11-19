@@ -19,5 +19,5 @@ class Player(object):
         if( self.money >= cost):
             self.money -= cost
             self.slots[item_dict[item_id]['type']] = item_dict[item_id]
-            self.send({'type' : 'player_took', 'item' : item_id})
-
+            self.send({'type' : 'you_took', 'item' : item_id})
+            self.game.opponent(self).send({'type' : 'other_took', 'item' : item_id})
