@@ -31,7 +31,7 @@ connect = function() {
     return console.log(evt);
   };
   return conn.onmessage = function(evt) {
-    var $arena, $i, i, item, msg, _fn, _i, _len, _ref;
+    var $arena, $i, i, item, msg, _fn, _i, _j, _k, _len, _ref;
     console.log("Message!");
     console.log(evt.data);
     msg = JSON.parse(evt.data);
@@ -61,6 +61,7 @@ connect = function() {
       case 'you_took':
         $i = $("#" + idify(msg.item));
         $i.stop();
+        $i = $i.detach();
         $i.appendTo($('#p2'));
         $i.css({
           'margin-left': 0,
@@ -74,10 +75,16 @@ connect = function() {
         } else {
           ($('#mybonus')).text("");
         }
+        if (msg.replaces) {
+          for (_j = 1; _j <= 5; _j++) {
+            $("#" + idify(msg.replaces)).remove();
+          }
+        }
         break;
       case 'other_took':
         $i = $("#" + idify(msg.item));
         $i.stop();
+        $i = $i.detach();
         $i.appendTo($('#p1'));
         $i.css({
           'margin-left': 0,
@@ -90,6 +97,11 @@ connect = function() {
           ($('#otherbonus')).text(" + " + msg.other_color_bonus + " color bonus");
         } else {
           ($('#otherbonus')).text("");
+        }
+        if (msg.replaces) {
+          for (_k = 1; _k <= 5; _k++) {
+            $("#" + idify(msg.replaces)).remove();
+          }
         }
     }
   };

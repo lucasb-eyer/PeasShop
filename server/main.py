@@ -49,6 +49,7 @@ def newgame():
     gid = generate_game_id(game_id_length)
     while gid in game_instances:
         gid = generate_game_id(game_id_length)
+    random.shuffle(item_list)
     game_instances[gid] = Game(gid, item_list)
     return redirect(url_for('game', gameid=gid))
 

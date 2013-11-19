@@ -48,6 +48,7 @@ connect = ->
             when 'you_took'
                 $i = $ "#" + idify msg.item
                 $i.stop()
+                $i = $i.detach()
                 $i.appendTo $ '#p2'
                 $i.css 'margin-left': 0, 'margin-top': 0
                 $i.addClass 'has'
@@ -58,9 +59,14 @@ connect = ->
                     ($ '#mybonus').text " + #{msg.color_bonus} color bonus"
                 else
                     ($ '#mybonus').text ""
+
+                if msg.replaces
+                    for [1..5]
+                        $("#" + idify msg.replaces).remove()
             when 'other_took'
                 $i = $ "#" + idify msg.item
                 $i.stop()
+                $i = $i.detach()
                 $i.appendTo $ '#p1'
                 $i.css 'margin-left': 0, 'margin-top': 0
                 $i.addClass 'has'
@@ -70,6 +76,10 @@ connect = ->
                     ($ '#otherbonus').text " + #{msg.other_color_bonus} color bonus"
                 else
                     ($ '#otherbonus').text ""
+
+                if msg.replaces
+                    for [1..5]
+                        $("#" + idify(msg.replaces)).remove()
         return
 
 mkitem = (item, i) ->

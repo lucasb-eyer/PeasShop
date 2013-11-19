@@ -18,28 +18,35 @@ class Player(object):
         cost = self.item_dict[item_id]['price']
         slot = self.item_dict[item_id]['type']
 
+        replaces = None
+        if slot in self.slots:
+            cost += 3
+            replaces = self.slots[slot]['id']
+            # self.score -= self.slots[slot]['rating']
+
         if self.money >= cost:
-            if slot not in self.slots:
-                self.money -= cost
-                self.score += self.item_dict[item_id]['rating']
-                self.slots[slot] = self.item_dict[item_id]
+            self.money -= cost
+            # self.score += self.item_dict[item_id]['rating']
+            self.slots[slot] = self.item_dict[item_id]
+            self.score = sum((item['rating'] for item in self.slots.values()))
 
-                bon = len(self.slots) > 1
-                color = self.item_dict[item_id]['color']
-                for v in self.slots.values() :
-                    if v['color'] != color :
-                        bon = False
+            bon = len(self.slots) > 1
+            color = self.item_dict[item_id]['color']
+            for v in self.slots.values() :
+                if v['color'] != color :
+                    bon = False
 
-                if bon :
-                    self.bonus = 3*len(self.slots)
-                else :
-                    self.bonus = 0
+            if bon :
+                self.bonus = 3*len(self.slots)
+            else :
+                self.bonus = 0
 
-                self.send({'type' : 'you_took', 'item' : item_id, 'money' :
-                           self.money, 'score' : self.score,
-                          'color_bonus' : self.bonus})
-                self.game.opponent(self).send({'type' : 'other_took', 'item' :
-                                               item_id, 'other_money' :
-                                               self.money, 'other_score' :
-                                               self.score,
-                                               'other_color_bonus' : self.bonus})
+            self.send({'type' : 'you_took', 'item' : item_id, 'money' :
+                        self.money, 'score' : self.score,
+                        'color_bonus' : self.bonus, 'replaces': replaces})
+            self.game.opponent(self).send({'type' : 'other_took', 'item' :
+                                            item_id, 'other_money' :
+                                            self.money, 'other_score' :
+                                            self.score,
+                                            'other_color_bonus' : self.bonus,
+                                            'replaces': replaces})
