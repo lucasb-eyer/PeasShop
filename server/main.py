@@ -149,7 +149,7 @@ def get_k_items_from_category(
             article_dict['rating'] = random.uniform(0.0, 5.0)
             article_dict['color'] = article.json()[u'color']
             article_dict['gender'] = gender
-            article_dict['speed'] = random.uniform(0.1, 1.0)
+            article_dict['speed'] = random.uniform(0.1, 1.0) * 0.5 +  0.1 * article_dict['rating']
             article_dict['id'] = sku
             res.append(article_dict)
 
