@@ -8,6 +8,7 @@ class Player(object):
         self.item_dict = {item['id']: item for item in game.item_list}
         self.slots = {}
         self.score = 0.0
+        self.bonus = 0.0
 
     def send(self, msg):
         self.ws.send(json.dumps(msg))
@@ -22,9 +23,23 @@ class Player(object):
                 self.money -= cost
                 self.score += self.item_dict[item_id]['rating']
                 self.slots[slot] = self.item_dict[item_id]
+
+                bon = len(self.slots) > 1
+                color = self.item_dict[item_id]['color']
+                for v in self.slots.values() :
+                    if v['color'] != color :
+                        bon = False
+
+                if bon :
+                    self.bonus = 3*len(self.slots)
+                else :
+                    self.bonus = 0
+
                 self.send({'type' : 'you_took', 'item' : item_id, 'money' :
-                           self.money, 'score' : self.score})
+                           self.money, 'score' : self.score,
+                          'color_bonus' : self.bonus})
                 self.game.opponent(self).send({'type' : 'other_took', 'item' :
                                                item_id, 'other_money' :
                                                self.money, 'other_score' :
-                                               self.score})
+                                               self.score,
+                                               'other_color_bonus' : self.bonus})
