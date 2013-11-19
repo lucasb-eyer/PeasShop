@@ -4,6 +4,7 @@ import random
 import string
 import json
 from game import Game
+from player import Player
 
 app = Flask(__name__)
 app.debug = True
@@ -21,7 +22,16 @@ def render_file(filename, *args, **kwargs):
 
 @sockets.route('/ws')
 def ws(ws):
-    ws.send(json.dumps({'wel': 'cum'}))
+    # As I can't get query parameters or variable URLs to work,
+    # I just let the user send me the gameid.
+    gid = ws.receive()
+    print("GID: {}".format(gid))
+
+    game = game_instances[gid]
+    player = Player(ws)
+
+    game.join(player)
+
     while True:
         message = ws.receive()
         ws.send(message)

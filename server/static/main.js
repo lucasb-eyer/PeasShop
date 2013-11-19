@@ -16,6 +16,7 @@ connect = function() {
   conn.onopen = function(evt) {
     console.log("Connected!");
     console.log(evt);
+    conn.send(g);
     return conn.send('Echo this, biatch!');
   };
   conn.onclose = function(evt) {

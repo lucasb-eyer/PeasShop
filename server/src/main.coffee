@@ -16,6 +16,7 @@ connect = ->
     conn.onopen = (evt) ->
         console.log "Connected!"
         console.log evt
+        conn.send g
         conn.send 'Echo this, biatch!'
 
     conn.onclose = (evt) ->
