@@ -3,6 +3,7 @@ from flask_sockets import Sockets
 import random
 import string
 import json
+from sys import stdout
 from game import Game
 from player import Player
 import requests
@@ -91,6 +92,9 @@ def initialize_item_list():
 #                                                'bags-accessories-womens' ]},
                   'special_category': {'n': ['strings-thongs']}}
 
+    i = 0
+    stdout.write('\r{}/11'.format(i))
+    stdout.flush()
     for c, d in categories.items():
         for g, cat_list in d.items():
             for cat in cat_list:
@@ -98,6 +102,9 @@ def initialize_item_list():
                      k_per_category, cat,
                      c, g)
                 item_list += item_list_temp
+                i += 1
+                stdout.write('\r{}/11'.format(i))
+                stdout.flush()
 
     print('Done, WITH A D!')
     random.shuffle(item_list)
