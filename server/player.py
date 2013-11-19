@@ -14,10 +14,14 @@ class Player(object):
         #Get cost
         cost = item_dict[item_id]['price']
         #Get slot
-        coste = item_dict[item_id]['item']
+        slot = item_dict[item_id]['type']
 
         if( self.money >= cost):
-            self.money -= cost
-            self.slots[item_dict[item_id]['type']] = item_dict[item_id]
-            self.send({'type' : 'you_took', 'item' : item_id})
-            self.game.opponent(self).send({'type' : 'other_took', 'item' : item_id})
+            if(slot not in self.slots)
+                self.money -= cost
+                self.slots[item_dict[item_id]['type']] = item_dict[item_id]
+                self.send({'type' : 'you_took', 'item' : item_id, 'money' :
+                           self.money})
+                self.game.opponent(self).send({'type' : 'other_took', 'item' :
+                                               item_id, 'other_money' :
+                                               self.money})
